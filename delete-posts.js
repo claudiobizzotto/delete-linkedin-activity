@@ -11,9 +11,9 @@ function sleep(seconds) {
 // Gets "Delete post" buttons on posts you've authored.
 function getDeleteButtons() {
     var buttons = [];
-    for (const span of document.querySelectorAll("span.feed-shared-control-menu__headline")) {
-        if (span.textContent.includes("Delete post")) {
-            buttons.push(span);
+    for (const h5 of document.querySelectorAll("h5.feed-shared-control-menu__headline")) {
+        if (h5.textContent.includes("Delete post")) {
+            buttons.push(h5);
         }
     }
 
