@@ -28,6 +28,8 @@ Bam! New Linkedin, new life.
 
 Use `delete-posts.js` to delete all posts authored by you. Open your browser and go to _Me >> Posts & Activities > Posts_ (or `https://www.linkedin.com/in/{username}/detail/recent-activity/shares`) and execute the script from the JavaScript console.
 
+Note: it may be necessary to refresh the page and restart the script from time to time.
+
 ### Comments
 
 Use `delete-comments.js` to delete all comments authored by you. Open your browser and go to _Me >> Posts & Activities_ (or `https://www.linkedin.com/in/{username}/detail/recent-activity`) and execute the script from the JavaScript console.
