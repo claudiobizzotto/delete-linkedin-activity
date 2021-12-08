@@ -90,7 +90,7 @@ async function init() {
 
         const deleteButton = await awaitThisTimed(".option-delete .feed-shared-control-menu__headline", menu);
 
-        if (null == deleteButton) {
+        if (true !== deleteButton instanceof HTMLElement) {
             throw `Though menu (id:${menu.id}) was found, post-delete button was not!`;
         } else {
             console.log("delete button in menu found");
@@ -100,7 +100,7 @@ async function init() {
 
         const modalAcceptButton = await awaitThisTimed("button.feed-shared-decision-modal__confirm-button");
         console.log(modalAcceptButton);
-        if (null == modalAcceptButton) {
+        if (true !== deleteButton instanceof HTMLElement) {
             throw "Post deletion modal not found!";
         } else {
             console.log("modal accept button found");
