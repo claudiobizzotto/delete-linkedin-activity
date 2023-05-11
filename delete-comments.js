@@ -8,16 +8,13 @@ function sleep(seconds) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 }
 
-// Gets "Delete" buttons on comments you've authored.
-function getDeleteCommentButtons() {
-    var buttons = [];
-    for (const span of document.querySelectorAll("span.mh4.comments-options-menu__text")) {
-        if (span.textContent.includes("Delete")) {
-            buttons.push(span);
-        }
+// Gets Comment dropdowns on comments you've authored.
+function getDeleteCommentDropdowns() {
+    var dropdowns = [], buttons = [];
+    for (const dropdown of document.querySelectorAll(".artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.comment-options-trigger.t-black--light.m0")) {
+        dropdowns.push(dropdown)
     }
-
-    return buttons;
+    return dropdowns;
 }
 
 // Gets "Delete" button inside "Are you sure you want to delete your comment?" confirmation box.
@@ -25,14 +22,8 @@ function getDeleteConfirmationButton() {
     return document.querySelector("button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view")
 }
 
-// Forces scroll down
-function loadMoreActivity() {
-    window.scrollTo(0, document.body.scrollHeight);
-}
-
 //
-async function deleteComment(deleteButton) {
-    deleteButton.click();
+async function deleteComment() {
     await sleep(2);
 
     var deleteConfirmationButton = getDeleteConfirmationButton();
@@ -43,9 +34,16 @@ async function deleteComment(deleteButton) {
 
 //
 async function deleteActivity() {
-    var deleteButtons = getDeleteCommentButtons();
-    for (var i = 0; i < deleteButtons.length; i++) {
-        deleteComment(deleteButtons[i]);
+    var deleteDropdowns = getDeleteCommentDropdowns();
+    for (var i = 0; i < deleteDropdowns.length; i++) {
+        deleteDropdowns[i].click()
+        spans = document.querySelectorAll(".comment-options-dropdown__option-text span")
+        for (const span of spans) {
+            if (span.textContent.includes("Delete")) {
+                span.click();
+            }
+        }
+        deleteComment();
         await sleep(3);
     }
 }
@@ -54,9 +52,6 @@ async function deleteActivity() {
 var keepGoing = true;
 async function init() {
     console.log("*** Starting activity deletion ***");
-    console.log(">>> Loading more activity")
-    loadMoreActivity()
-    await sleep(2);
     console.log(">>> Deleting comments")
     deleteActivity();
     if (keepGoing) {
